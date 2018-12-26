@@ -1,0 +1,2 @@
+cibuildwheel azure pipelines example
+====================================
