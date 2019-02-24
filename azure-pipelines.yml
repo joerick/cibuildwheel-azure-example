@@ -5,7 +5,7 @@ jobs:
     - task: UsePythonVersion@0
     - bash: |
         python -m pip install --upgrade pip
-        pip install cibuildwheel
+        pip install https://github.com/astrofrog/cibuildwheel/archive/azure-windows.zip
         cibuildwheel --platform linux --output-dir wheelhouse .
     - task: PublishBuildArtifacts@1
       inputs: {pathtoPublish: 'wheelhouse'}
@@ -22,10 +22,19 @@ jobs:
 - job: windows
   pool: {vmImage: 'vs2017-win2016'}
   steps: 
-    - task: UsePythonVersion@0
+    - task: UsePythonVersion@0, inputs: {versionSpec: '2.7', architecture: x86}
+    - task: UsePythonVersion@0, inputs: {versionSpec: '2.7', architecture: x64}
+    - task: UsePythonVersion@0, inputs: {versionSpec: '3.4', architecture: x86}
+    - task: UsePythonVersion@0, inputs: {versionSpec: '3.4', architecture: x64}
+    - task: UsePythonVersion@0, inputs: {versionSpec: '3.5', architecture: x86}
+    - task: UsePythonVersion@0, inputs: {versionSpec: '3.5', architecture: x64}
+    - task: UsePythonVersion@0, inputs: {versionSpec: '3.6', architecture: x86}
+    - task: UsePythonVersion@0, inputs: {versionSpec: '3.6', architecture: x64}
+    - task: UsePythonVersion@0, inputs: {versionSpec: '3.7', architecture: x86}
+    - task: UsePythonVersion@0, inputs: {versionSpec: '3.7', architecture: x64}
     - bash: |
         python -m pip install --upgrade pip
-        pip install cibuildwheel
+        pip install https://github.com/astrofrog/cibuildwheel/archive/azure-windows.zip
         cibuildwheel --platform windows --output-dir wheelhouse .
     - task: PublishBuildArtifacts@1
       inputs: {pathtoPublish: 'wheelhouse'}
