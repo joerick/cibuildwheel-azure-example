@@ -1,0 +1,32 @@
+language: generic
+
+matrix:
+  include:
+    # Linux Python 2
+    - sudo: required
+      language: python
+      python: 2.7
+      services: docker
+      env: PYTHON=python
+
+    # Linux Python 3
+    - sudo: required
+      language: python
+      python: 3.4
+      services: docker
+      env: PYTHON=python
+
+    # macOS Python 2
+    - os: osx
+      env: PYTHON=python2
+
+    # macOS Python 3
+    - os: osx
+      env: PYTHON=python3
+      before_install:
+        - brew update
+        - brew outdated python || brew upgrade python
+
+install: $PYTHON -m pip install -r requirements-dev.txt
+
+script: $PYTHON ./bin/run_tests.py
