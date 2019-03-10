@@ -37,6 +37,6 @@ jobs:
     - bash: |
         python -m pip install --upgrade pip
         pip install ./vendor/cibuildwheel
-        cibuildwheel --platform windows --output-dir wheelhouse .
+        CIBW_SKIP='cp34-*' cibuildwheel --platform windows --output-dir wheelhouse .
     - task: PublishBuildArtifacts@1
       inputs: {pathtoPublish: 'wheelhouse'}
